@@ -24,6 +24,12 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+
+app.use(['/deleteEntry'], function (req, res, next) {
+    req.io = io;
+    next();
+});
+
 app.use('/', routes);
 app.use('/users', users);
 
