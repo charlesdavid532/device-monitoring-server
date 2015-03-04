@@ -25,7 +25,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 
-app.use(['/deleteEntry'], function (req, res, next) {
+app.use(['/deviceTaken','/deviceReturned'], function (req, res, next) {
     req.io = io;
     next();
 });

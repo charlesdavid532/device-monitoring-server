@@ -38,16 +38,27 @@ function displayDeviceUsers(result) {
     $('.device-table-container').html($tableHtml);
 }
 
-function deleteEntry(rowNumber) {
-    $('.device-table-container .device-table tbody tr')[rowNumber].remove();
+function deleteEntry(data) {
+    var rows = $('.device-table-container .device-table tbody tr'),
+        cells;
+    for (var i = 0; i < rows.length; i++) {
+        cells = $(rows[i]).find('td');
+        for (var j = 0; j < cells.length; j++) {
+            if ($(cells[j]).html() === data.deviceName) {
+                rows[i].remove();
+                return;
+            }
+        }
+    }
+    //$('.device-table-container .device-table tbody tr.'+data.deviceName).remove();
 }
 
 function addEntry(data) {
     var $rowHtml = "<tr>", j = 0,
-        columns = Object.keys(data[0]);
+        columns = Object.keys(data);
 
     for (j = 0; j < columns.length; j++) {
-        $rowHtml += "<td>" + data[0][columns[j]] + "</td>";
+        $rowHtml += "<td>" + data[columns[j]] + "</td>";
     }
 
     $rowHtml += "</tr>";
@@ -64,7 +75,9 @@ function bindSocketEvents() {
 }
 
 function temp() {
-    $.post(siteUrl + "/deleteEntry");
+    //$.post(siteUrl + "/deleteEntry");
+    //$.post(siteUrl + "/deviceTaken", { empCode: 'rst', deviceCode: 'efg' });
+    $.post(siteUrl + "/deviceReturned", { deviceCode: 'efg' });
 }
 
 bindSocketEvents();

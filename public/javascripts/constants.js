@@ -1,4 +1,4 @@
 ﻿(function () {
     DeviceMonitoringApplication = {};
-    DeviceMonitoringApplication.SERVER_ADDRESS = "http://localhost:3031";
+    DeviceMonitoringApplication.SERVER_ADDRESS = "http://192.168.2.10:3031";
 })();
